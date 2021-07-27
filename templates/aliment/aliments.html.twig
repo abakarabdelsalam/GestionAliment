@@ -7,54 +7,71 @@
 	{% if isCalorie %}
 
 		avec moins de 50 calorie
+	{% else %}
+		avec moins de 5 calorie
+
 	{% endif %}
 
 {% endblock %}
 {% block body %}
-	<a href="{{path("alimentsParCalorie",{"calorie" : 50 })}}">Aliment avec moins de 50calories au 100g</a>
-	<div class="row">
-		{% for aliment in aliments %}
-			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
-				<div class="card border-primary mb-3 mx-auto" style="max-width:20rem">
-					<div class="card-header text-center">
-						<img src="{{asset('images/' ~ aliment.image)}}" class="moTyps card-img-top">
-					</div>
+	<div class="btn btn-center">
+		<a href="{{path("aliments",{"calorie" : 50 })}}" class="btn btn-primary btn btn-center">Tous les aliments</a>
 
-				</div>
-				<div class="card-body">
-					<h3 class="card-title text-center  mx-3 border-bottom border-primary">{{aliment.nom}}
-					</h3>
-					<div class class"card-text">
-						<h4 class="text-center">Prix (Kilo) :{{aliment.Prix}}
-						</h4>
 
-						<table class="card-table">
-							<tr class=" table-primary">
-								<td>Propriété</td>
-								<td>Vakeur (100g)</td>
-							</tr>
-							<tr>
-								<td>Calorie</td>
-								<td>{{aliment.calorie}}
-								</td>
-							</tr>
+		<a href="{{path("alimentsParCalorie",{"calorie" : 50 })}}" class="btn btn-primary btn btn-center">Aliment avec moins de 50 calories au 100g</a>
+		<a href="{{path("alimentsParGlucide",{"glucide" : 5 })}}" class="btn btn-primary">Aliment avec moins de 5 glucide au 100g</a>
+	</div>
 
-							<tr>
-								<td>Proteine</td>
-								<td>{{aliment.proteine}}</td>
-							</tr>
+	<br><br>
 
-							<tr>
-								<td>Lipides</td>
-								<td>{{aliment.lipide}}</td>
-							</tr>
 
-						</table>
+	<div class="container">
+		<div class="row">
+			{% for aliment in aliments %}
+				<div class="col-12 col-md-6 col-lg-4 col-xl-3 ">
+
+					<div class="card border-primary mb-3 mx-auto">
+						<div class="card-header text-center">
+							<img src="{{asset('images/' ~ aliment.image)}}" class="moTyps card-img-top">
+						</div>
 
 					</div>
+					<div class="card border-primary  mx-auto">
 
+						<h3 class="card-title text-center  mx-3 border-bottom border-primary">{{aliment.nom}}
+						</h3>
+						<div class class"card-text text-center">
+							<h4 class="text-center">Prix (Kilo) :{{aliment.Prix}}
+							</h4>
+
+							<table class="card-table">
+								<tr class=" table-primary">
+									<td>Propriété</td>
+									<td>Vakeur (100g)</td>
+								</tr>
+								<tr>
+									<td>Calorie</td>
+									<td>{{aliment.calorie}}
+									</td>
+								</tr>
+
+								<tr>
+									<td>Proteine</td>
+									<td>{{aliment.proteine}}</td>
+								</tr>
+
+								<tr>
+									<td>Lipides</td>
+									<td>{{aliment.lipide}}</td>
+								</tr>
+
+							</table>
+
+						</div>
+
+					</div>
 				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}
