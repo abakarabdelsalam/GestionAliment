@@ -17,6 +17,8 @@ class AlimentController extends AbstractController
         $aliments = $repository->findAll();
         return $this->render('aliment/aliments.html.twig', [
             'aliments' => $aliments,
+            'isCalorie' => false
+
         ]);
     }
     /**
@@ -27,6 +29,8 @@ class AlimentController extends AbstractController
         $aliments = $repository->getAlimentParCalorie($calorie);
         return $this->render('aliment/aliments.html.twig', [
             'aliments' => $aliments,
+            'isCalorie' => true
+
         ]);
     }
 }

@@ -3,6 +3,12 @@
 {% block title %}Hello AlimentController!
 {% endblock %}
 {% block monTitre %}Liste de tous les aliments
+
+	{% if isCalorie %}
+
+		avec moins de 50 calorie
+	{% endif %}
+
 {% endblock %}
 {% block body %}
 	<a href="{{path("alimentsParCalorie",{"calorie" : 50 })}}">Aliment avec moins de 50calories au 100g</a>
