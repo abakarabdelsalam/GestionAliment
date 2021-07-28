@@ -9,14 +9,12 @@
 
 
 	<div class="container">
-		<a href="" class="btn btn-success">Ajouter</a>
+		<a href="{{path('admin_aliment_creation')}}" class="btn btn-success">Ajouter</a>
+
 		<br>
 		<br>
-
-
 		<table class="table">
 			<thead class="table-primary"></thead>
-
 			<tr>
 				<th scope="col">Images</th>
 				<th scope="col">Aliments</th>
@@ -24,6 +22,7 @@
 				<th scope="col">Calories</th>
 				<th scope="col">Proteine</th>
 				<th scope="col">Glucide</th>
+				<th scope="col">Lipides</th>
 				<th scope="col">Action</th>
 			</tr>
 		</thead>
@@ -32,6 +31,8 @@
 				<tr>
 					<td>
 						<img src="{{asset('images/' ~ aliment.image)}}" class="moTypss"></td>
+					<td>{{aliment.nom}}</td>
+
 
 					<td>{{aliment.prix}}
 					</td>

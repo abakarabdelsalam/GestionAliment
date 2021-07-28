@@ -3,8 +3,18 @@
 {% block title %}Modification
 
 {% endblock %}
-{% block monTitre %}Modification
-	{{aliment.nom}}
+{% block monTitre %}
+
+	Modification
+
+	{% if isModification %}
+		{{aliment.nom}}
+	{% else %}
+
+		Ajout d'un aliment
+
+	{% endif %}
+
 
 {% endblock %}
 {% block body %}
