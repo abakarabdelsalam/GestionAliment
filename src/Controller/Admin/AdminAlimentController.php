@@ -38,8 +38,10 @@ class AdminAlimentController extends AbstractController
         $form = $this->createForm(AlimentType::class, $aliment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $modif = $aliment->getId() !== null;
             $entityManager->persist($aliment);
             $entityManager->flush();
+            $this->addFlash("success", ($modif) ? "La modification à été effectuée" : "L'ajout à été effectuée");
             return $this->redirectToRoute("admin_aliment");
         }
         return $this->render('admin/admin_aliment/modifAjoutAliment.html.twig', [
@@ -51,11 +53,13 @@ class AdminAlimentController extends AbstractController
     /**
      * @Route("/admin/aliment/{id}", name="admin_aliment_suppression", methods="delete")
      */
-    public function suppression(Aliment $aliment, Request $request, ObjectManager $objectManager)
+    public function suppression(Aliment $aliment, Request $request, EntityManagerInterface $objectManager)
     {
         if ($this->isCsrfTokenValid("SUP" . $aliment->getId(), $request->get('_token'))) {
             $objectManager->remove($aliment);
             $objectManager->flush();
+            $this->addFlash("success", "La suppression à été effectuée");
+
             return $this->redirectToRoute("admin_aliment");
         }
     }
