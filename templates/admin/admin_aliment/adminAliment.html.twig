@@ -2,57 +2,44 @@
 
 {% block title %}Admin
 {% endblock %}
-{% block monTitre %}Partie Admin
+
+{% block monTitre %}Page d'administration
 {% endblock %}
 {% block body %}
-	<br>
-
-
-	<div class="container">
-		<a href="{{path('admin_aliment_creation')}}" class="btn btn-success">Ajouter</a>
-
-		<br>
-		<br>
-		<table class="table">
-			<thead class="table-primary"></thead>
+	<a class="btn btn-success" href="{{path('admin_aliment_creation')}}">Ajouter</a>
+	<table class="table">
+		<tr class="table-primary">
+			<td>Image</td>
+			<td>Aliment</td>
+			<td>Prix</td>
+			<td>Calories</td>
+			<td>Protéines</td>
+			<td>Glucides</td>
+			<td>Lipides</td>
+			<td>Actions</td>
+		</tr>
+		{% for aliment in aliments %}
 			<tr>
-				<th scope="col">Images</th>
-				<th scope="col">Aliments</th>
-				<th scope="col">Prix</th>
-				<th scope="col">Calories</th>
-				<th scope="col">Proteine</th>
-				<th scope="col">Glucide</th>
-				<th scope="col">Lipides</th>
-				<th scope="col">Action</th>
+				<td><img src="{{asset('images/' ~ aliment.image)}}" class="moTypss"></td>
+
+				<td>
+					<strong>{{aliment.nom}}</strong>
+				</td>
+				<td>{{aliment.prix}}</td>
+				<td>{{aliment.calorie}}</td>
+				<td>{{aliment.proteine}}</td>
+				<td>{{aliment.glucide}}</td>
+				<td>{{aliment.lipide}}</td>
+				<td>
+					<a class="btn btn-secondary" href="{{path('admin_aliment_modification',{'id' : aliment.id})}}">Modifier</a>
+					<form method="POST" style="display:inline-block" action="{{path('admin_aliment_suppression', {'id' : aliment.id})}}">
+						<input type="hidden" name="_method" value="delete">
+						<input type="hidden" name="_token" value="{{csrf_token('SUP' ~ aliment.id)}}">
+						<input type="submit" class="btn btn-danger" value="supprimer" onsubmit="return confirm('Confirmer la suppression ?')">
+					</form>
+				</td>
 			</tr>
-		</thead>
-		<tbody>
-			{% for aliment in aliments %}
-				<tr>
-					<td>
-						<img src="{{asset('images/' ~ aliment.image)}}" class="moTypss"></td>
-					<td>{{aliment.nom}}</td>
-
-
-					<td>{{aliment.prix}}
-					</td>
-					<td>{{aliment.calorie}}
-					</td>
-					<td>{{aliment.proteine}}
-					</td>
-					<td>{{aliment.glucide}}
-					</td>
-					<td>{{aliment.lipide}}
-					</td>
-					<td>
-						<a href="{{path('admin_aliment_modification', {'id': aliment.id})}}" class="btn btn-secondary">Modifier</a>
-
-
-						<a href="" class="btn btn-danger">Supprimer</a>
-					</td>
-
-				</tr>
-			{% endfor %}
-		</tbody>
+		{% endfor %}
 	</table>
-</div>{% endblock %}
+
+{% endblock %}
